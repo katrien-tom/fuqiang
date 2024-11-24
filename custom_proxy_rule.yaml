@@ -1,9 +1,0 @@
-payload:
-  - DOMAIN-SUFFIX,chatgpt.com
-  - DOMAIN-SUFFIX,oaistatic.com
-  - DOMAIN-SUFFIX,intel.com
-  - DOMAIN-SUFFIX,jetbrains.com
-  - DOMAIN-SUFFIX,cloudflare.com
-  - DOMAIN-SUFFIX,ipleak.net
-  - DOMAIN-SUFFIX,gitea.com
-  - DOMAIN-SUFFIX,googleapis.com
