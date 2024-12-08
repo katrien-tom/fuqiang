@@ -8,9 +8,9 @@
 #################################################
 
 # 配置参数
-BACKEND_URL="http://192.168.66.86:5000"  # 转换后端地址
-SUBSCRIPTION_URL="http://192.168.66.100:5500/1.txt"  # 订阅地址
-TEMPLATE_URL="https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/config/config_tproxy.json"  # 配置文件（规则模板)
+BACKEND_URL="http://192.168.66.105:5000"  # 转换后端地址
+SUBSCRIPTION_URL="https://RsL0CM.tosslk.xyz/9d0a38a0cd510d988e0c226cee220c5f"  # 订阅地址
+TEMPLATE_URL="http://192.168.66.105:5500/fuqiang/sing_box/config/config_tproxy.json"  # 配置文件（规则模板)
 TPROXY_PORT=7895  # sing-box tproxy 端口，和配置文件（规则模板）里的端口一致！
 PROXY_FWMARK=1
 PROXY_ROUTE_TABLE=100
@@ -140,6 +140,10 @@ mkdir -p /etc/sing-box
 # 备份当前配置
 backup_config "$CONFIG_FILE" "$CONFIG_BACKUP"
 
+# 禁用防火墙规则（暂时不加载 sing-box 防火墙规则）
+echo "$(timestamp) 暂时禁用防火墙规则..."
+nft list ruleset | grep -q 'sing-box' && nft flush ruleset
+
 # 下载新配置
 echo "$(timestamp) 开始下载配置文件..."
 FULL_URL="${BACKEND_URL}/config/${SUBSCRIPTION_URL}&file=${TEMPLATE_URL}"
@@ -155,8 +159,34 @@ if ! sing-box check -c "$CONFIG_FILE"; then
     error_exit "配置验证失败"
 fi
 
-# 创建防火墙规则文件
-echo "$(timestamp) 创建防火墙规则文件..."
+# 启动 sing-box 服务并将输出重定向到 start.log 文件
+echo "$(timestamp) 启动 sing-box 服务..."
+sing-box run -c "$CONFIG_FILE" > /root/start.log 2>&1 &
+
+# 等待服务启动并检查状态
+retry_count=3  # 重试次数
+interval=3     # 每次检查间隔时间（秒）
+success_count=0  # 成功计数器
+
+for i in $(seq 1 $retry_count); do
+    echo "$(timestamp) 第 $i 次检查 sing-box 服务状态..."
+    if pgrep -x "sing-box" > /dev/null; then
+        echo "$(timestamp) sing-box 服务运行中（第 $i 次成功）"
+        success_count=$((success_count + 1))
+    fi
+    sleep $interval
+done
+
+# 检查成功次数
+if [ "$success_count" -ne "$retry_count" ]; then
+    error_exit "sing-box 服务未连续 $retry_count 次成功运行，请检查日志"
+fi
+
+# 如果达到这里，说明服务启动成功，继续执行后续操作
+echo "$(timestamp) sing-box 服务连续 $retry_count 次检查均成功，继续执行后续操作..."
+
+# 应用防火墙规则
+echo "$(timestamp) 应用防火墙规则..."
 cat > /etc/nftables.d/99-singbox.nft << EOF
 #!/usr/sbin/nft -f
 
@@ -200,42 +230,23 @@ table inet sing-box {
     }
 }
 EOF
-
 # 设置权限
 chmod 644 /etc/nftables.d/99-singbox.nft
-
 # 应用防火墙规则
 if ! nft -f /etc/nftables.d/99-singbox.nft; then
     error_exit "应用防火墙规则失败"
 fi
+echo "$(timestamp) 防火墙规则已应用"
 
-# 配置路由规则
+# 配置路由规则（IPv4）
+echo "$(timestamp) 配置 IPv4 路由规则..."
 ip rule del table $PROXY_ROUTE_TABLE >/dev/null 2>&1  # 删除已存在的规则
 ip rule add fwmark $PROXY_FWMARK table $PROXY_ROUTE_TABLE
-# 配置路由规则
-ip rule del table $PROXY_ROUTE_TABLE >/dev/null 2>&1  # 删除已存在的规则
-ip rule add fwmark $PROXY_FWMARK table $PROXY_ROUTE_TABLE
-
-# 清理并添加路由
-ip route flush table $PROXY_ROUTE_TABLE >/dev/null 2>&1
-ip route add local default dev lo table $PROXY_ROUTE_TABLE
-
-# 配置 IPv6 路由规则
+ip route flush table $PROXY_ROUTE_TABLE >/dev/null 2>&1  # 清除原有路由
+ip route add local default dev lo table $PROXY_ROUTE_TABLE  # 配置默认路由到本地回环接口
+# 配置 IPv6 路由规则（如果需要）
+echo "$(timestamp) 配置 IPv6 路由规则..."
 ip -6 rule del table $PROXY_ROUTE_TABLE >/dev/null 2>&1  # 删除已存在的规则
 ip -6 rule add fwmark $PROXY_FWMARK table $PROXY_ROUTE_TABLE
-
-# 清理并添加 IPv6 路由
-ip -6 route flush table $PROXY_ROUTE_TABLE >/dev/null 2>&1
-ip -6 route add local default dev lo table $PROXY_ROUTE_TABLE
-
-# 启动服务并将输出重定向到 /dev/null
-echo "$(timestamp) 启动 sing-box 服务..."
-sing-box run -c "$CONFIG_FILE" >/dev/null 2>&1 &
-
-# 检查服务状态
-sleep 2
-if pgrep -x "sing-box" > /dev/null; then
-    echo "$(timestamp) sing-box 启动成功 运行模式--TProxy"
-else
-    error_exit "sing-box 启动失败，请检查日志"
-fi
+ip -6 route flush table $PROXY_ROUTE_TABLE >/dev/null 2>&1  # 清除原有路由
+ip -6 route add local default dev lo table $PROXY_ROUTE_TABLE  # 配置默认IPv6路由到本地回环接口
