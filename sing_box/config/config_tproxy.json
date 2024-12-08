@@ -100,9 +100,9 @@
   ],
    
    "rule_set": [
-     { "tag": "customer_block", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/customer_block.json", "download_detour": "🎯 全球直连"},
-     { "tag": "customer_direct", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/customer_direct.json", "download_detour": "🎯 全球直连" },
-     { "tag": "customer_proxy", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/customer_proxy.json", "download_detour": "🎯 全球直连" },
+     { "tag": "customer_block", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/rule/customer_block.json", "download_detour": "🎯 全球直连"},
+     { "tag": "customer_direct", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/rule/customer_direct.json", "download_detour": "🎯 全球直连" },
+     { "tag": "customer_proxy", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/rule/customer_proxy.json", "download_detour": "🎯 全球直连" },
      
      { "tag": "geosite-chat", "type": "remote", "format": "binary", "url": "https://ghp.ci/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs", "download_detour": "🎯 全球直连" },
      { "tag": "geosite-youtube", "type": "remote", "format": "binary", "url": "https://ghp.ci/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs", "download_detour": "🎯 全球直连" },
