@@ -8,9 +8,9 @@
 #################################################
 
 # 配置参数
-BACKEND_URL="http://192.168.66.105:5000"  # 转换后端地址
-SUBSCRIPTION_URL="https://RsL0CM.tosslk.xyz/9d0a38a0cd510d988e0c226cee220c5f"  # 订阅地址
-TEMPLATE_URL="http://192.168.66.105:5500/fuqiang/sing_box/config/config_tproxy.json"  # 配置文件（规则模板)
+BACKEND_URL="http://127.0.0.1:5000"  # 转换后端地址
+SUBSCRIPTION_URL="https://192.168.66.105:5500/1.txt"  # 订阅地址
+TEMPLATE_URL="https://raw.binggao.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/config/config_tproxy.json"  # 配置文件（规则模板)
 TPROXY_PORT=7895  # sing-box tproxy 端口，和配置文件（规则模板）里的端口一致！
 PROXY_FWMARK=1
 PROXY_ROUTE_TABLE=100
