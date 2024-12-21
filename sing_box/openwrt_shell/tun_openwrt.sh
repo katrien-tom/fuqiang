@@ -8,9 +8,9 @@
 #################################################
 
 # 配置参数
-BACKEND_URL="http://192.168.66.105:5000"  # 转换后端地址
-SUBSCRIPTION_URL="http://192.168.66.105:5500/1.txt"  # 订阅地址
-TEMPLATE_URL="https://ghp.ci/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/master/config/singbox/config_tun_dev.json"  # 配置文件（规则模板)
+BACKEND_URL="http://127.0.0.1:5000"  # 转换后端地址
+SUBSCRIPTION_URL="https://new.binggao.xyz"  # 订阅地址
+TEMPLATE_URL="https://raw.binggao.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/config/config_tproxy.json"  # 配置文件（规则模板)
 MAX_RETRIES=3  # 最大重试次数
 RETRY_DELAY=3  # 重试间隔时间（秒）
 CONFIG_FILE="/etc/sing-box/config.json"
