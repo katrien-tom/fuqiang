@@ -1,15 +1,7 @@
 #!/bin/sh
-
-#################################################
-# 描述: OpenWrt sing-box TProxy模式 配置脚本
-# 版本: 1.3.0
-# 作者: Youtube: 七尺宇
-# 用途: 配置和启动 sing-box TProxy模式 代理服务
-#################################################
-
 # 配置参数
 BACKEND_URL="http://127.0.0.1:5000"  # 转换后端地址
-SUBSCRIPTION_URL="https://192.168.66.105:5500/1.txt"  # 订阅地址
+SUBSCRIPTION_URL="https://new.binggao.xyz"  # 订阅地址
 TEMPLATE_URL="https://raw.binggao.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/config/config_tproxy.json"  # 配置文件（规则模板)
 TPROXY_PORT=7895  # sing-box tproxy 端口，和配置文件（规则模板）里的端口一致！
 PROXY_FWMARK=1

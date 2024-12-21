@@ -13,3 +13,9 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+支持Docker
+
+```
+docker build --tag 'sing-box' .
+docker run -d -p 5000:5000 sing-box:latest
+```
