@@ -153,7 +153,7 @@ fi
 
 # 启动 sing-box 服务并将输出重定向到 start.log 文件
 echo "$(timestamp) 启动 sing-box 服务..."
-sing-box run -c "$CONFIG_FILE" > /root/start.log 2>&1 &
+sing-box run -c "$CONFIG_FILE" >/dev/null 2>&1 &
 
 # 等待服务启动并检查状态
 retry_count=3  # 重试次数
