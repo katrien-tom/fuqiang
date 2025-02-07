@@ -17,5 +17,5 @@ sudo systemctl restart docker
 
 ```
 docker build --tag 'sing-box' .
-docker run -d -p 5000:5000 sing-box:latest
+docker run -d -p 5000:5000 --name singbox sing-box:latest
 ```
