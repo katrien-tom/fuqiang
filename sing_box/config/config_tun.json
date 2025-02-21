@@ -22,7 +22,8 @@
     "servers": [
       {
         "tag": "google",
-        "address": "https://8.8.8.8/dns-query"
+        "address": "https://8.8.8.8/dns-query",
+        "detour": "🚀 节点选择"
       },
       {
         "tag": "local",
