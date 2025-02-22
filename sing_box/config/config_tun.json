@@ -52,7 +52,7 @@
         "server": "google"
       }
     ],
-    "final": "alidns",
+    "final": "google",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
