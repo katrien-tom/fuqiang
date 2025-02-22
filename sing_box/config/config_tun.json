@@ -59,6 +59,7 @@
   "inbounds": [
     {
       "type": "tun",
+      "tag": "tun-in",
       "address": [
         "172.20.0.1/30",
         "fdfe:dcba:9876::1/126"
@@ -80,7 +81,6 @@
       "type": "mixed",
       "listen": "::",
       "listen_port": 7890,
-      "sniff": true,
       "users": []
     }
   ],
@@ -216,6 +216,7 @@
     "final": "🐠 漏网之鱼",
     "rules": [
       {
+        "inbound": "tun-in",
         "action": "sniff"
       },
       {
