@@ -52,6 +52,33 @@
           "A",
           "AAAA"
         ],
+        "rule_set": "geosite-cn",
+        "server": "remote"
+      },
+      {
+        "rule_set": "geosite-cn",
+        "server": "local"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geosite-geolocation-!cn",
+            "invert": true
+          },
+          {
+            "rule_set": "geoip-cn"
+          }
+        ],
+        "server": "google",
+        "client_subnet": "1.0.8.0/24"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
         "server": "remote"
       }
     ],
