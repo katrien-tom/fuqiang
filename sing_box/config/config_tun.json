@@ -21,8 +21,7 @@
     "servers": [
       {
         "tag": "google",
-        "address": "https://dns.google/dns-query",
-        "address_resolver": "alidns",
+        "address": "tls://8.8.8.8",
         "detour": "🚀 节点选择"
       },
       {
@@ -53,12 +52,13 @@
         "server": "google"
       }
     ],
-    "final": "google",
+    "final": "alidns",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
     {
       "type": "tun",
+      "tag": "tun-in",
       "address": [
         "172.20.0.1/30",
         "fdfe:dcba:9876::1/126"
@@ -77,7 +77,6 @@
       }
     },
     {
-      "tag": "tun-in",
       "type": "mixed",
       "listen": "::",
       "listen_port": 7890,
