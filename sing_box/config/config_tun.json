@@ -21,6 +21,10 @@
   "dns": {
     "servers": [
       {
+        "tag": "google",
+        "address": "tls://8.8.8.8"
+      },
+      {
         "tag": "local",
         "address": "223.5.5.5",
         "detour": "🎯 全球直连"
@@ -76,14 +80,14 @@
         "http_proxy": {
           "enabled": true,
           "server": "127.0.0.1",
-          "server_port": 7895
+          "server_port": 7890
         }
       }
     },
     {
       "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 7895,
+      "listen": "::",
+      "listen_port": 7890,
       "sniff": true,
       "users": []
     }
