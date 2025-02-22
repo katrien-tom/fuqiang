@@ -14,53 +14,88 @@
     "cache_file": {
       "enabled": true,
       "path": "/etc/sing-box/cache.db",
-      "store_fakeip": false
+      "store_fakeip": true,
+      "store_rdrc": true
     }
   },
   "dns": {
     "servers": [
       {
         "tag": "google",
-        "address": "https://dns.google/dns-query",
-        "address_resolver": "alidns",
-        "detour": "🚀 节点选择"
+        "address": "tls://8.8.8.8"
       },
       {
-        "tag": "alidns",
+        "tag": "local",
         "address": "223.5.5.5",
         "detour": "🎯 全球直连"
+      },
+      {
+        "tag": "remote",
+        "address": "fakeip"
       }
     ],
     "rules": [
       {
         "outbound": "any",
-        "server": "alidns"
+        "server": "local"
       },
       {
         "clash_mode": "Direct",
-        "server": "alidns"
+        "server": "local"
       },
       {
         "clash_mode": "Global",
-        "server": "google"
+        "server": "remote"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "rule_set": "geosite-cn",
+        "server": "remote"
       },
       {
         "rule_set": "geosite-cn",
-        "server": "alidns"
+        "server": "local"
       },
       {
-        "rule_set": "geosite-geolocation-!cn",
-        "server": "google"
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geosite-geolocation-!cn",
+            "invert": true
+          },
+          {
+            "rule_set": "geoip-cn"
+          }
+        ],
+        "server": "google",
+        "client_subnet": "1.0.8.0/24"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "remote"
       }
     ],
-    "final": "alidns",
-    "strategy": "prefer_ipv4"
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    },
+    "final": "local",
+    "strategy": "prefer_ipv4",
+    "independent_cache": true
   },
   "inbounds": [
     {
       "type": "tun",
       "address": [
-        "172.20.0.1/30",
+        "172.18.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
       "mtu": 9000,
