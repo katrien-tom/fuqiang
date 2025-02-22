@@ -59,7 +59,6 @@
   "inbounds": [
     {
       "type": "tun",
-      "tag": "tun-in",
       "address": [
         "172.20.0.1/30",
         "fdfe:dcba:9876::1/126"
@@ -78,6 +77,7 @@
       }
     },
     {
+      "tag": "tun-in",
       "type": "mixed",
       "listen": "::",
       "listen_port": 7890,
