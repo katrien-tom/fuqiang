@@ -2,7 +2,8 @@
   "log": {
     "disabled": false,
     "level": "info",
-    "timestamp": true
+    "timestamp": true,
+    "output": "/var/log/sing-box-run.log"
   },
   
   "experimental": {
