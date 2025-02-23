@@ -29,7 +29,11 @@
         "tag": "alidns",
         "address": "223.5.5.5",
         "detour": "🎯 全球直连"
-      }
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://name_error"
+      },
     ],
     "rules": [
       {
