@@ -45,6 +45,10 @@
         "server": "google"
       },
       {
+        "query_type": "HTTPS",
+        "server": "block-dns"
+      },
+      {
         "rule_set": "geosite-cn",
         "server": "alidns"
       },
