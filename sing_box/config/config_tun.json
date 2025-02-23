@@ -29,11 +29,7 @@
         "tag": "alidns",
         "address": "223.5.5.5",
         "detour": "🎯 全球直连"
-      },
-      {
-        "tag": "block-dns",
-        "address": "rcode://name_error"
-      },
+      }
     ],
     "rules": [
       {
@@ -47,10 +43,6 @@
       {
         "clash_mode": "Global",
         "server": "google"
-      },
-      {
-        "query_type": "HTTPS",
-        "server": "block-dns"
       },
       {
         "rule_set": "geosite-cn",
