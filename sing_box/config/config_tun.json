@@ -259,7 +259,7 @@
       },
       {
         "rule_set": "customer_proxy",
-        "outbound": "🎯 全球直连"
+        "outbound": "🚀 节点选择"
       },
       {
         "rule_set": "geosite-private",
