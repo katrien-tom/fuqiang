@@ -82,7 +82,7 @@
     {"domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "outbound": "🎯 全球直连"},
     {"rule_set": "customer_block", "action": "reject"},
     {"rule_set": "customer_direct", "outbound": "🎯 全球直连"},
-    {"rule_set": "customer_proxy", "outbound": "🎯 全球直连"},
+    {"rule_set": "customer_proxy", "outbound": "🚀 节点选择"},
     {"rule_set": "geosite-private", "outbound": "🚀 节点选择"},
     {"rule_set": "geosite-chat", "outbound": "🤖 OpenAI"},
     {"rule_set": "geosite-youtube", "outbound": "📹 YouTube"},
