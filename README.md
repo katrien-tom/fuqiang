@@ -6,7 +6,7 @@ clash rules
 ```shell
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://doc.binggao.xyz"]
+  "registry-mirrors": ["https://doc.100069.xyz"]
 }
 EOF
 sudo systemctl daemon-reload
