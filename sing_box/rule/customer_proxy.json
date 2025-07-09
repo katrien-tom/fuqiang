@@ -4,7 +4,7 @@
   "rules": [
     {
       "domain_suffix": [
-        "linux.do"
+        "gin-gonic.com"
       ]
     }
   ]
