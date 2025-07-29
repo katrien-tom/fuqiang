@@ -135,9 +135,10 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
+  - RULE-SET,directlite,直连
+  - RULE-SET,proxylite,🚀 默认代理
   - RULE-SET,private_domain,直连
   - RULE-SET,apple_domain,🍎 Apple
-  - RULE-SET,proxylite,🚀 默认代理
   - RULE-SET,ai,🤖 ChatGPT
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
   - RULE-SET,youtube_domain,📹 YouTube
@@ -165,6 +166,7 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 rule-providers: 
   proxylite: { <<: *class, url: "https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/clash/customer_proxy.list"}
+  directlite: { <<: *class, url: "https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/clash/customer_direct.list"}
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   ai: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
   youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
