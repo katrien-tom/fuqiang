@@ -109,9 +109,9 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - DOMAIN-SUFFIX,qichiyu.com,🌐 全部节点
-  - RULE-SET,directlite,直连
+  - RULE-SET,directlite,🎯 直连
   - RULE-SET,proxylite,🌐 全部节点
-  - RULE-SET,private_domain,直连
+  - RULE-SET,private_domain,🎯 直连
   - RULE-SET,apple_domain,🌐 全部节点
   - RULE-SET,proxylite,🌐 全部节点
   - RULE-SET,ai,🌐 全部节点
@@ -140,8 +140,8 @@ rule-anchor:
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 rule-providers: 
-  proxylite: { <<: *class, url: "https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/clash/customer_proxy.list"}
-  directlite: { <<: *class, url: "https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/clash/customer_direct.list"}
+  proxylite: { <<: *class, url: "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/clash/customer_proxy.list"}
+  directlite: { <<: *class, url: "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/clash/customer_direct.list"}
   private_domain: { <<: *domain, url: "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   ai: {  <<: *domain, url: "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
   youtube_domain: { <<: *domain, url: "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
