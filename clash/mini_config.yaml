@@ -4,7 +4,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "http://192.168.66.100:5500/1.txt"
+    url: "http://192.168.66.100:5500/123.txt"
     type: http
     interval: 86400
     health-check:
