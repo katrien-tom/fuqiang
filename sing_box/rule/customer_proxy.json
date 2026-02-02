@@ -4,7 +4,12 @@
   "rules": [
     {
       "domain_suffix": [
-        "gin-gonic.com"
+        "gin-gonic.com",
+        "bulianglin.com",
+        "nodeseek.com",
+        "deeplx.org",
+        "linux.do",
+        "idcflare.com"
       ]
     }
   ]

@@ -4,7 +4,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "http://192.168.66.100:5500/123.txt"
+    url: "http://192.168.66.100:5500/11.txt"
     type: http
     interval: 86400
     health-check:
@@ -101,37 +101,37 @@ dns:
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
 # 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
 proxy-groups:
-  - {name: 🎯 直连, type: select, proxies: [直连, 🌐 全部节点]}
-  - {name: 🐟 漏网之鱼, type: select, proxies: [直连, 🌐 全部节点]}
-  - {name: 🌐 全部节点, type: select, include-all: true}
+  - {name: 🎯 全球直连, type: select, proxies: [直连, 🚀 默认代理]}
+  - {name: 🐟 漏网之鱼, type: select, proxies: [直连, 🚀 默认代理]}
+  - {name: 🚀 默认代理, type: select, include-all: true}
 
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
-  - DOMAIN-SUFFIX,qichiyu.com,🌐 全部节点
-  - RULE-SET,directlite,🎯 直连
-  - RULE-SET,proxylite,🌐 全部节点
-  - RULE-SET,private_domain,🎯 直连
-  - RULE-SET,apple_domain,🌐 全部节点
-  - RULE-SET,proxylite,🌐 全部节点
-  - RULE-SET,ai,🌐 全部节点
-  - RULE-SET,github_domain,🌐 全部节点
-  - RULE-SET,youtube_domain,🌐 全部节点
-  - RULE-SET,google_domain,🌐 全部节点
-  - RULE-SET,onedrive_domain,🌐 全部节点
-  - RULE-SET,microsoft_domain,🌐 全部节点
-  - RULE-SET,tiktok_domain,🌐 全部节点
-  - RULE-SET,speedtest_domain,🌐 全部节点
-  - RULE-SET,telegram_domain,🌐 全部节点
-  - RULE-SET,netflix_domain,🌐 全部节点
-  - RULE-SET,paypal_domain,🌐 全部节点
-  - RULE-SET,gfw_domain,🌐 全部节点
-  - RULE-SET,geolocation-!cn,🌐 全部节点
-  - RULE-SET,cn_domain,🎯 直连
-  - RULE-SET,google_ip,🌐 全部节点
-  - RULE-SET,netflix_ip,🌐 全部节点
-  - RULE-SET,telegram_ip,🌐 全部节点
-  - RULE-SET,cn_ip,🎯 直连
+  - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
+  - RULE-SET,directlite,🎯 全球直连
+  - RULE-SET,proxylite,🚀 默认代理
+  - RULE-SET,private_domain,🎯 全球直连
+  - RULE-SET,apple_domain,🚀 默认代理
+  - RULE-SET,proxylite,🚀 默认代理
+  - RULE-SET,ai,🚀 默认代理
+  - RULE-SET,github_domain,🚀 默认代理
+  - RULE-SET,youtube_domain,🚀 默认代理
+  - RULE-SET,google_domain,🚀 默认代理
+  - RULE-SET,onedrive_domain,🚀 默认代理
+  - RULE-SET,microsoft_domain,🚀 默认代理
+  - RULE-SET,tiktok_domain,🚀 默认代理
+  - RULE-SET,speedtest_domain,🚀 默认代理
+  - RULE-SET,telegram_domain,🚀 默认代理
+  - RULE-SET,netflix_domain,🚀 默认代理
+  - RULE-SET,paypal_domain,🚀 默认代理
+  - RULE-SET,gfw_domain,🚀 默认代理
+  - RULE-SET,geolocation-!cn,🚀 默认代理
+  - RULE-SET,cn_domain,🎯 全球直连
+  - RULE-SET,google_ip,🚀 默认代理
+  - RULE-SET,netflix_ip,🚀 默认代理
+  - RULE-SET,telegram_ip,🚀 默认代理
+  - RULE-SET,cn_ip,🎯 全球直连
   - MATCH,🐟 漏网之鱼
 
 # 规则集
