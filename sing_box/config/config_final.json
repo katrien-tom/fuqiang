@@ -17,8 +17,7 @@
   "log": {
     "disabled": false,
     "level": "info",
-    "timestamp": true,
-    "output": "/var/log/sing-box-run.log"
+    "timestamp": true
   },
   "dns": {
     "servers": [
