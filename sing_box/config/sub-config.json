@@ -35,7 +35,7 @@
   "route": {
     "rules": [
       {"action": "sniff", "sniffer": ["http", "tls", "quic", "dns"]},
-      {"type": "logical", "mode": "or", "rules": [{"port": 53}, {"protocol": "dns"}], "action": "hijack-dns"},
+      {"inbound": "dns-in", "action": "hijack-dns"},
       {"ip_is_private": true, "outbound": "🎯 全球直连"},
       {"clash_mode": "direct", "outbound": "🎯 全球直连"},
       {"clash_mode": "global", "outbound": "GLOBAL"},
@@ -92,21 +92,45 @@
   },
   "inbounds": [
     {
-      "tag": "tun-in",
-      "type": "tun",
-      "address": [
-        "172.19.0.1/30",
-        "fdfe:dcba:9876::1/126"
-      ],
-      "mtu": 9000,
-      "auto_route": true,
-      "auto_redirect": true,
-      "strict_route": false
+      "tag": "dns-in",
+      "type": "direct",
+      "listen": "::",
+      "listen_port": 1053
     },
     {
-      "type": "mixed",
+      "tag": "http-in",
+      "type": "http",
+      "listen": "::",
+      "listen_port": 8080
+    },
+    {
+      "tag": "socks-in",
+      "type": "socks",
+      "listen": "::",
+      "listen_port": 1080
+    },
+    {
+      "tag": "redirect-in",
+      "type": "redirect",
       "listen": "::",
       "listen_port": 7890
+    },
+    {
+      "tag": "tproxy-in",
+      "type": "tproxy",
+      "listen": "::",
+      "listen_port": 7891
+    },
+    {
+      "tag": "tun-in",
+      "type": "tun",
+      "interface_name": "momo",
+      "address": [
+        "172.31.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "auto_route": false,
+      "auto_redirect": false
     }
   ],
   "experimental": {
