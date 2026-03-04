@@ -21,6 +21,13 @@
     "reverse_mapping": true
   },
   "outbounds": [
+    {
+      "tag": "机场节点",
+      "type": "selector",
+      "outbounds": ["{all}"],
+      "default": "中继-HK"
+    },
+    {"tag": "自建落地","type": "selector","outbounds": ["rndc2-hysteria2", "rndc2-reality", "rndc2-vless-cdn"]},
     {"tag": "🚀 默认代理", "type": "selector", "outbounds": ["{all}"]},
     {"tag": "🐟 漏网之鱼", "type": "selector", "outbounds": ["🎯 全球直连", "🚀 默认代理"]},
     {"tag": "GLOBAL", "type": "selector", "outbounds": ["🚀 默认代理"]},
