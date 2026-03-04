@@ -27,7 +27,7 @@
       "outbounds": []
     },
     {"tag": "自建落地","type": "selector","outbounds": []},
-    {"tag": "🚀 默认代理", "type": "selector", "outbounds": ["机场节点"]},
+    {"tag": "🚀 默认代理", "type": "selector", "outbounds": ["机场节点","自建落地"]},
     {"tag": "🐟 漏网之鱼", "type": "selector", "outbounds": ["🎯 全球直连", "🚀 默认代理"]},
     {"tag": "GLOBAL", "type": "selector", "outbounds": ["🚀 默认代理"]},
     {"tag": "🎯 全球直连", "type": "direct"}
