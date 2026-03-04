@@ -24,8 +24,7 @@
     {
       "tag": "机场节点",
       "type": "selector",
-      "outbounds": ["{all}"],
-      "default": "中继-HK"
+      "outbounds": ["{all}"]
     },
     {"tag": "自建落地","type": "selector","outbounds": ["rndc2-hysteria2", "rndc2-reality", "rndc2-vless-cdn"]},
     {"tag": "🚀 默认代理", "type": "selector", "outbounds": ["机场节点"]},
