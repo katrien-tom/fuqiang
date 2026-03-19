@@ -3,7 +3,7 @@
     "servers": [
       {"tag": "local", "type": "udp", "server": "223.5.5.5"},
       {"tag": "public", "type": "https", "server": "dns.alidns.com", "domain_resolver": "local"},
-      {"tag": "foreign", "type": "https", "server": "8.8.8.8", "detour": "🚀 默认代理"}
+      {"tag": "foreign", "type": "tls", "server": "8.8.8.8", "detour": "🚀 默认代理"}
     ],
     "rules": [
       {"clash_mode": "direct", "server": "local"},
@@ -13,7 +13,7 @@
     ],
     "final": "foreign",
     "client_subnet": "223.5.5.0/24",
-    "strategy": "prefer_ipv4",
+    "strategy": "ipv4_only",
     "independent_cache": true,
     "reverse_mapping": true
   },
@@ -119,10 +119,7 @@
       "tag": "tun-in",
       "type": "tun",
       "interface_name": "momo",
-      "address": [
-        "172.31.0.1/30",
-        "fdfe:dcba:9876::1/126"
-      ],
+      "address": ["172.19.0.1/30"],
       "auto_route": false,
       "auto_redirect": false
     }
