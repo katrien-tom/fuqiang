@@ -61,7 +61,6 @@
     "rule_set": [
       {"tag": "customer_direct", "type": "remote", "format": "source", "url": "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/rule/customer_direct.json", "download_detour": "🎯 全球直连"},
       {"tag": "customer_proxy", "type": "remote", "format": "source", "url": "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/rule/customer_proxy.json","download_detour": "🎯 全球直连"},
-      {"tag": "geosite-fakeipfilter", "type": "remote", "format": "source", "url": "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/katrien-tom/fuqiang/refs/heads/main/sing_box/rule/fakeip_filter.json", "download_detour": "🎯 全球直连"},
       {"tag": "geosite-ai", "type": "remote", "format": "binary", "url": "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs", "download_detour": "🎯 全球直连"},
       {"tag": "geosite-youtube", "type": "remote", "format": "binary", "url": "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs", "download_detour": "🎯 全球直连"},
       {"tag": "geosite-google", "type": "remote", "format": "binary", "url": "https://raw.100069.xyz/banyejiu/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs", "download_detour": "🎯 全球直连"},
