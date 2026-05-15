@@ -16,7 +16,7 @@
     ],
     "final": "foreign",
     "client_subnet": "223.5.5.0/24",
-    "strategy": "prefer_ipv4",
+    "strategy": "ipv4_only",
     "independent_cache": true,
     "reverse_mapping": true
   },
