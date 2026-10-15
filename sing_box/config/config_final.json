@@ -6,18 +6,18 @@
       {"tag": "ali", "type": "https", "server": "223.5.5.5"},
       {"tag": "tx", "type": "https", "server": "doh.pub", "domain_resolver": "hosts"},
       {"tag": "google", "type": "https", "server": "8.8.8.8", "detour": "默认代理"},
-      {"tag": "fake-ip-dns-server", "type": "fakeip", "inet4_range": "198.19.0.0/16"},
+      {"tag": "fakeip", "type": "fakeip", "inet4_range": "198.19.0.0/16"},
       {"type": "hosts", "tag": "hosts", "predefined": {"doh.pub": ["1.12.12.21", "120.53.53.53"]}}
     ],
     "rules": [
       {"query_type": ["HTTPS", "SVCB"], "action": "reject"},
       {"clash_mode": "Direct", "server": "ali"},
-      {"clash_mode": "Global", "server": "fake-ip-dns-server"},
+      {"clash_mode": "Global", "server": "fakeip"},
       {"rule_set": ["fakeipfilter-cn", "geosite-cn", "geosite-microsoft@cn", "geosite-apple@cn", "geosite-private"], "server": "ali"},
       {"rule_set": "fakeipfilter-!cn", "server": "google"},
       {"type": "logical", "mode": "and", "rules": [{"query_type": ["A", "AAAA"]}, {"rule_set": "geosite-geolocation-!cn", "invert": true}], "action": "evaluate", "server": "google", "client_subnet": "223.5.5.0/24","timeout": "2s"},
       {"match_response": true, "rule_set": "geoip-cn", "server": "ali"},
-      {"query_type": ["A", "AAAA"], "server": "fake-ip-dns-server", "rewrite_ttl": 1}
+      {"query_type": ["A", "AAAA"], "server": "fakeip", "rewrite_ttl": 1}
     ],
     "final": "google",
     "strategy": "ipv4_only", 
@@ -27,7 +27,7 @@
   },
   "outbounds": [
     {"tag": "默认代理","type": "selector","outbounds": ["🐸 手动选择","♻️ 自动选择"]},
-    {"tag": "♻️ 自动选择","type": "urltest","interval": "10m","tolerance": 50,"outbounds": []},
+    {"tag": "♻️ 自动选择","type": "urltest","url": "https://clients1.google.com/generate_204","interval": "10m","tolerance": 50,"outbounds": []},
     {"tag": "🐸 手动选择","type": "selector","outbounds": ["直连"]},
     {"tag": "漏网之鱼","type": "selector","outbounds": ["直连","默认代理"]},
     {"tag": "GLOBAL","type": "selector","outbounds": ["默认代理"]},
@@ -38,8 +38,9 @@
   ],
   "route": {
     "rules": [
+      {"type": "logical", "mode": "and", "rules": [{"port": [53, 853], "invert": true}, {"clash_mode": "Global", "invert": true}, {"type": "logical", "mode": "or", "rules": [{"ip_is_private": true}, {"rule_set": "geoip-cn"}]}], "action": "bypass"},
       {"type": "logical", "mode": "or", "rules": [{"domain_suffix": "push.apple.com"}, {"rule_set": "geoip-telegram"}], "invert": true, "action": "sniff", "sniffer": ["http", "tls", "stun", "quic", "dns"], "timeout": "100ms"},
-      {"inbound": "dns-in", "action": "hijack-dns"},
+      {"type": "logical", "mode": "or", "rules": [{"port": 53}, {"protocol": "dns"}], "action": "hijack-dns"},
       {"ip_is_private": true, "outbound": "直连"},
       {"type": "logical", "mode": "or", "rules": [{"port": 853}, {"protocol": ["stun", "quic"]}], "action": "reject", "no_drop": true},
       {"network": "icmp", "action": "resolve"},
@@ -47,26 +48,26 @@
       {"clash_mode": "Direct", "outbound": "直连"},
       {"clash_mode": "Global", "outbound": "GLOBAL"},
       {"rule_set": "geosite-private", "outbound": "直连"},
-      {"rule_set": "geosite-category-ai-!cn", "outbound": "默认代理"},
-      {"rule_set": "geosite-youtube", "outbound": "默认代理"},
-      {"rule_set": "geosite-google", "outbound": "默认代理"},
-      {"rule_set": "geosite-github", "outbound": "默认代理"},
-      {"rule_set": "geosite-onedrive", "outbound": "默认代理"},
+      {"rule_set": "geosite-category-ai-!cn", "outbound": "AI"},
+      {"rule_set": "geosite-youtube", "outbound": "YouTube"},
+      {"rule_set": "geosite-google", "outbound": "Google"},
+      {"rule_set": "geosite-github", "outbound": "Github"},
+      {"rule_set": "geosite-onedrive", "outbound": "OneDrive"},
       {"rule_set": "geosite-microsoft@cn", "outbound": "直连"},
-      {"rule_set": "geosite-microsoft", "outbound": "默认代理"},
+      {"rule_set": "geosite-microsoft", "outbound": "Microsoft"},
       {"rule_set": "geosite-apple@cn", "outbound": "直连"},
-      {"rule_set": "geosite-apple", "outbound": "默认代理"},
-      {"rule_set": "geosite-telegram", "outbound": "默认代理"},
-      {"rule_set": "geosite-tiktok", "outbound": "默认代理"},
-      {"rule_set": "geosite-netflix", "outbound": "默认代理"},
-      {"rule_set": "geosite-paypal", "outbound": "默认代理"},
-      {"rule_set": "geosite-binance", "outbound": "默认代理"},
-      {"rule_set": "geosite-okx", "outbound": "默认代理"},
-      {"rule_set": "geosite-category-cryptocurrency", "outbound": "默认代理"},
+      {"rule_set": "geosite-apple", "outbound": "Apple"},
+      {"rule_set": "geosite-telegram", "outbound": "Telegram"},
+      {"rule_set": "geosite-tiktok", "outbound": "TikTok"},
+      {"rule_set": "geosite-netflix", "outbound": "Netflix"},
+      {"rule_set": "geosite-paypal", "outbound": "Wallet"},
+      {"rule_set": "geosite-binance", "outbound": "Wallet"},
+      {"rule_set": "geosite-okx", "outbound": "Wallet"},
+      {"rule_set": "geosite-category-cryptocurrency", "outbound": "Wallet"},
       {"rule_set": "geosite-steam@cn", "outbound": "直连"},
-      {"rule_set": "geosite-steam", "outbound": "默认代理"},
+      {"rule_set": "geosite-steam", "outbound": "Steam"},
       {"rule_set": "geosite-geolocation-!cn", "outbound": "默认代理"},
-      {"action": "resolve"},
+      {"inbound": "mixed-in", "action": "resolve"},
       {"rule_set": "geoip-telegram", "outbound": "Telegram"},
       {"rule_set": "geoip-cn", "outbound": "直连"}
     ],
@@ -83,45 +84,20 @@
   },
   "inbounds": [
     {
-      "tag": "dns-in",
-      "type": "direct",
-      "listen": "::",
-      "listen_port": 1053
-    },
-    {
-      "tag": "http-in",
-      "type": "http",
-      "listen": "::",
-      "listen_port": 8080
-    },
-    {
-      "tag": "socks-in",
-      "type": "socks",
-      "listen": "::",
-      "listen_port": 1080
-    },
-    {
-      "tag": "redirect-in",
-      "type": "redirect",
-      "listen": "::",
-      "listen_port": 7890
-    },
-    {
-      "tag": "tproxy-in",
-      "type": "tproxy",
-      "listen": "::",
-      "listen_port": 7891
-    },
-    {
       "tag": "tun-in",
       "type": "tun",
-      "interface_name": "momo",
       "address": [
-        "172.31.0.1/30",
+        "172.19.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
-      "auto_route": false,
-      "auto_redirect": false
+      "auto_route": true,
+      "auto_redirect": true
+    },
+    {
+      "tag": "mixed-in",
+      "type": "mixed",
+      "listen": "0.0.0.0",
+      "listen_port": 7890
     }
   ],
   "services": [
@@ -140,12 +116,12 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "path": "cache.db",
+      "path": "/etc/sing-box/cache.db",
       "store_dns": true
     },
     "clash_api": {
       "external_controller": "0.0.0.0:9095",
-      "external_ui": "ui",
+      "external_ui": "/etc/sing-box/ui",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
       "secret": "passwd",
       "default_mode": "Rule"
