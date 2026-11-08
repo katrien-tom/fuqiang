@@ -7,7 +7,7 @@
       {"tag": "tx", "type": "https", "server": "doh.pub", "domain_resolver": "hosts"},
       {"tag": "google", "type": "https", "server": "8.8.8.8", "detour": "默认代理"},
       {"tag": "fakeip", "type": "fakeip", "inet4_range": "198.19.0.0/16"},
-      {"type": "hosts", "tag": "hosts", "predefined": {"doh.pub": ["1.12.12.21", "120.53.53.53"]}}
+      {"type": "hosts", "tag": "hosts", "path": ["/etc/cfopt/hosts"],"predefined": {"doh.pub": ["1.12.12.21", "120.53.53.53"]}}
     ],
     "rules": [
       {"query_type": ["HTTPS", "SVCB"], "action": "reject"},
@@ -27,7 +27,7 @@
   },
   "outbounds": [
     {"tag": "默认代理","type": "selector","outbounds": ["🐸 手动选择","♻️ 自动选择"]},
-    {"tag": "♻️ 自动选择","type": "urltest","url": "https://clients1.google.com/generate_204","interval": "10m","tolerance": 50,"outbounds": []},
+    {"tag": "♻️ 自动选择","type": "urltest","url": "https://clients1.google.com/generate_204","interval": "5m","tolerance": 10,"outbounds": []},
     {"tag": "🐸 手动选择","type": "selector","outbounds": ["直连"]},
     {"tag": "漏网之鱼","type": "selector","outbounds": ["直连","默认代理"]},
     {"tag": "GLOBAL","type": "selector","outbounds": ["默认代理"]},
