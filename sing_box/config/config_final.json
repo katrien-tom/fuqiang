@@ -26,7 +26,7 @@
     "reverse_mapping": true
   },
   "outbounds": [
-    {"tag": "默认代理","type": "selector","outbounds": ["🐸 手动选择","♻️ 自动选择"]},
+    {"tag": "默认代理","type": "selector","outbounds": ["♻️ 自动选择","🐸 手动选择"],"default": "♻️ 自动选择"},
     {"tag": "♻️ 自动选择","type": "urltest","url": "https://clients1.google.com/generate_204","interval": "5m","tolerance": 10,"outbounds": []},
     {"tag": "🐸 手动选择","type": "selector","outbounds": ["直连"]},
     {"tag": "漏网之鱼","type": "selector","outbounds": ["直连","默认代理"]},
